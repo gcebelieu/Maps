@@ -20,7 +20,6 @@ use Maps\LocationParser;
 use Maps\PolygonParser;
 use Maps\RectangleParser;
 use Maps\SemanticMaps;
-use Maps\ServiceParam;
 use Maps\WmsOverlayParser;
 
 if ( defined( 'Maps_COORDS_FLOAT' ) ) {
@@ -152,14 +151,18 @@ $GLOBALS['wgExtensionFunctions'][] = function() {
 	$googleMaps = MapsMappingServices::getServiceInstance( 'googlemaps3' );
 	$googleMaps->addFeature( 'display_map', MapsDisplayMapRenderer::class );
 
+
 	// OpenLayers API
 	include_once __DIR__ . '/includes/services/OpenLayers/OpenLayers.php';
 
 	MapsMappingServices::registerService(
 		'openlayers',
-		MapsOpenLayers::class,
-		[ 'display_map' => MapsDisplayMapRenderer::class ]
+		MapsOpenLayers::class
 	);
+
+	$openLayers = MapsMappingServices::getServiceInstance( 'openlayers' );
+	$openLayers->addFeature( 'display_map', MapsDisplayMapRenderer::class );
+
 
 	// Leaflet API
 	include_once __DIR__ . '/includes/services/Leaflet/Leaflet.php';
@@ -179,10 +182,6 @@ $GLOBALS['wgExtensionFunctions'][] = function() {
 
 	$GLOBALS['wgParamDefinitions']['coordinate'] = [
 		'string-parser' => LatLongParser::class,
-	];
-
-	$GLOBALS['wgParamDefinitions']['mappingservice'] = [
-		'definition' => ServiceParam::class,
 	];
 
 	$GLOBALS['wgParamDefinitions']['mapslocation'] = [

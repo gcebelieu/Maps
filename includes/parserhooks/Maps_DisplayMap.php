@@ -93,8 +93,6 @@ class MapsDisplayMap extends ParserHook {
 	protected function getParameterInfo( $type ) {
 		$params = MapsMapper::getCommonParameters();
 
-		$params['mappingservice']['feature'] = 'display_map';
-
 		$params['coordinates'] = [
 			'type' => 'string',
 			'aliases' => [ 'coords', 'location', 'address', 'addresses', 'locations', 'points' ],

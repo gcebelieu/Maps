@@ -2,8 +2,6 @@
 
 namespace Maps\Test;
 
-use DataValues\Geo\Values\LatLongValue;
-
 /**
  * @covers MapsDisplayMap
  *
